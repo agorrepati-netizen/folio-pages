@@ -1,8 +1,145 @@
 {
-  "build_id": "20261020T170606Z",
-  "built_at": "2026-10-20T17:06:06.868Z",
-  "source": "reference/atlas (snapshots of 16 October 2026)",
+  "build_id": "20261020T190113Z",
+  "built_at": "2026-10-20T19:01:13.941Z",
+  "source": "CJA runReport responses saved by this run (C:\\Users\\agorr\\FolioLocal\\responses\\cja-2)",
   "data_view": "CJA B2B Edition Demo",
+  "queries": {
+    "by_industry": {
+      "tool_use_id": "toolu_01EadjPkr817WfGRdXxyg6Wc",
+      "saved_at": "2026-10-20T19:00:27.675Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 31,
+      "total_elements": 31,
+      "response_sha256": "50a6a2338641d6577dc1eb74aefd5754478055380ff8515cbfc1527e491674d5"
+    },
+    "funnel_by_industry": {
+      "tool_use_id": "toolu_01XE8dSFcZ1YU56QSypMkJhU",
+      "saved_at": "2026-10-20T19:00:37.452Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 31,
+      "total_elements": 31,
+      "response_sha256": "df0f47a0e4e9cddb196f075200a6d8db621a69be58ed2294505966a289453304"
+    },
+    "engagement_by_industry": {
+      "tool_use_id": "toolu_01Q43fkfigKL7YweGCPddvHJ",
+      "saved_at": "2026-10-20T19:00:37.468Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 31,
+      "total_elements": 31,
+      "response_sha256": "70775bbde7aeb9e8084cb0df86ea660f8479f866d037fa0fa817a1be76f9d56e"
+    },
+    "velocity_by_industry": {
+      "tool_use_id": "toolu_01QJxv1i2EhPsfwjDkPaQHGk",
+      "saved_at": "2026-10-20T19:01:10.563Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 31,
+      "total_elements": 31,
+      "response_sha256": "e8a9e95ed15c3c0254a0361607671139d976adb91bc46adb32046b83ba1d4c8f"
+    },
+    "monthly_trend": {
+      "tool_use_id": "toolu_015hadL5L2byZjMKraEFZEhi",
+      "saved_at": "2026-10-20T19:01:00.752Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 12,
+      "total_elements": 12,
+      "response_sha256": "8361d8febb77de681f984ad0ee3449b01b152d6e5d3740a530ef32061fdf20c6"
+    },
+    "monthly_prior": {
+      "tool_use_id": "toolu_01WBgA1rdeSj25reYjWTbDT4",
+      "saved_at": "2026-10-20T19:01:00.548Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 12,
+      "total_elements": 12,
+      "response_sha256": "86a2c4891624f3bdd3045e1745ad651c7af9bc96faf8a0941004b6730d7eaf57"
+    },
+    "industry_month": {
+      "tool_use_id": "toolu_013UwC3L8oT6FRb3pQLabrL1",
+      "saved_at": "2026-10-20T19:00:47.348Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 310,
+      "total_elements": 310,
+      "response_sha256": "c5903b3ca46b45524bae1b137c888837c7a500cf0e32d38da434a52bb4989ba1"
+    },
+    "by_size": {
+      "tool_use_id": "toolu_01MfCQ7vmkZxwqkD7bVVLU7z",
+      "saved_at": "2026-10-20T19:00:37.375Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 3,
+      "total_elements": 3,
+      "response_sha256": "3807d670edbdc6cc84cecc61d464cecc409776544b13b91e0cc61c7d57feb8d3"
+    },
+    "by_propensity": {
+      "tool_use_id": "toolu_01X78ut1nNDRpyQfDNthoLjE",
+      "saved_at": "2026-10-20T19:00:27.598Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 3,
+      "total_elements": 3,
+      "response_sha256": "d7d425da874caeba39e83f719563e665e6cb1820ee3476da109a436eae159e10"
+    },
+    "by_churn": {
+      "tool_use_id": "toolu_01KRWxVRybLQmJLn79HJV5Hb",
+      "saved_at": "2026-10-20T19:00:27.600Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 3,
+      "total_elements": 3,
+      "response_sha256": "b846ad9d0faa129289816490ac3afca8904516e8de4013759ace551a2ebc0974"
+    },
+    "monthly_funnel": {
+      "tool_use_id": "toolu_01TkHvzLbPpc4aFDEKZpf1dg",
+      "saved_at": "2026-10-20T19:01:00.641Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 24,
+      "total_elements": 24,
+      "response_sha256": "8d175e8a2525814d39a22256a89d8d0e7651504625e4dc7c233447a9d2e66ae1"
+    },
+    "weekly": {
+      "tool_use_id": "toolu_01PU86RL6T1EYgnrkW9QZogw",
+      "saved_at": "2026-10-20T19:01:11.191Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 105,
+      "total_elements": 105,
+      "response_sha256": "86b97fe3c0a76978801d6234599e7ff7c0f95e14d8213bc2b5e83140e6112346"
+    },
+    "month_mix": {
+      "tool_use_id": "toolu_01EQM53Zum6AZQ7i3qagvMru",
+      "saved_at": "2026-10-20T19:00:47.237Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 198,
+      "total_elements": 198,
+      "response_sha256": "8719af091f85b88b7230e6e5fb9d193392daf8e6bf8b46d780444f6bca3b2457"
+    },
+    "seller_cross": {
+      "tool_use_id": "toolu_01T4u8YHDgTXUomDVYFARKoo",
+      "saved_at": "2026-10-20T19:01:10.625Z",
+      "via": "hook",
+      "calls_matching": 1,
+      "rows": 221,
+      "total_elements": 221,
+      "response_sha256": "33753476de8c1a5a4ae90ade217551e507552260b05872a60e64eae0291980f1"
+    },
+    "industry_month_prior": {
+      "tool_use_id": "toolu_01CPhjrubmA2jJvEzJZEAwhE",
+      "saved_at": "2026-10-20T19:00:47.488Z",
+      "via": "claude code tool-results file",
+      "calls_matching": 1,
+      "rows": 372,
+      "total_elements": 372,
+      "response_sha256": "85d03fe8b9a44153a01f181cc44d66bace27bcc76027a805088a7402399b7936"
+    }
+  },
   "checks": "passed",
   "check_count": 41,
   "files": {
@@ -23,64 +160,64 @@
       "sha256": "f2094bbf6141b359722c4fe454eb6c4b0f0e42cc10cc7af921fc158fceb86539"
     },
     "data/by_churn.json": {
-      "bytes": 776,
-      "sha256": "645e19081290cb9149e207cce637cf969b5dd2d698072b5a940f806b353ee7fd"
+      "bytes": 1120,
+      "sha256": "b846ad9d0faa129289816490ac3afca8904516e8de4013759ace551a2ebc0974"
     },
     "data/by_industry.json": {
-      "bytes": 7716,
-      "sha256": "2ef60d3c3bed5ef68e0bed4cc911e7890482ec181a0837848c3701401dca4978"
+      "bytes": 7686,
+      "sha256": "50a6a2338641d6577dc1eb74aefd5754478055380ff8515cbfc1527e491674d5"
     },
     "data/by_propensity.json": {
-      "bytes": 755,
-      "sha256": "55410d48752fbaaede8d9f92e5081970552584b9936db51ec2fd1846a7fe61c8"
+      "bytes": 1096,
+      "sha256": "d7d425da874caeba39e83f719563e665e6cb1820ee3476da109a436eae159e10"
     },
     "data/by_size.json": {
-      "bytes": 829,
-      "sha256": "28a10a165833be25f8d97147c179d46566d2967876bc55d5a7373ce9e81507b3"
+      "bytes": 1129,
+      "sha256": "3807d670edbdc6cc84cecc61d464cecc409776544b13b91e0cc61c7d57feb8d3"
     },
     "data/engagement_by_industry.json": {
-      "bytes": 6539,
-      "sha256": "2e1adea53c5663f5381f2d080ee735751b3fd8ccbafcf50209f661693ba14647"
+      "bytes": 6587,
+      "sha256": "70775bbde7aeb9e8084cb0df86ea660f8479f866d037fa0fa817a1be76f9d56e"
     },
     "data/funnel_by_industry.json": {
-      "bytes": 8232,
-      "sha256": "630be404463b2ea4d57176af8718f143eea0511282e032e7bb2389426eb540d2"
+      "bytes": 8273,
+      "sha256": "df0f47a0e4e9cddb196f075200a6d8db621a69be58ed2294505966a289453304"
     },
     "data/industry_month_prior.json": {
       "bytes": 55061,
       "sha256": "85d03fe8b9a44153a01f181cc44d66bace27bcc76027a805088a7402399b7936"
     },
     "data/industry_month.json": {
-      "bytes": 44262,
-      "sha256": "ba20bd66487743a3467dea1dc500e156fe471368240176bd259a7ae156115b65"
+      "bytes": 44323,
+      "sha256": "c5903b3ca46b45524bae1b137c888837c7a500cf0e32d38da434a52bb4989ba1"
     },
     "data/month_mix.json": {
-      "bytes": 67923,
-      "sha256": "2c0fc1a79b06010131880618c29f41dc3762bb4725b00158a6a62f143510c42a"
+      "bytes": 28647,
+      "sha256": "8719af091f85b88b7230e6e5fb9d193392daf8e6bf8b46d780444f6bca3b2457"
     },
     "data/monthly_funnel.json": {
-      "bytes": 5163,
-      "sha256": "4b625a9ca608c82cb73bad89557ea5343c5d03778de8d2bc876f48fd42f4ef5c"
+      "bytes": 8038,
+      "sha256": "8d175e8a2525814d39a22256a89d8d0e7651504625e4dc7c233447a9d2e66ae1"
     },
     "data/monthly_prior.json": {
-      "bytes": 2196,
-      "sha256": "7367623ab8307490c4e06a63d927f39d13692e17ede2d844bbd46433c5ad3a9c"
+      "bytes": 2195,
+      "sha256": "86a2c4891624f3bdd3045e1745ad651c7af9bc96faf8a0941004b6730d7eaf57"
     },
     "data/monthly_trend.json": {
-      "bytes": 2326,
-      "sha256": "9c92023f031b7f2445a602f077e2163c8908dd09da7aa2c6a7cc887b5948ba9f"
+      "bytes": 2335,
+      "sha256": "8361d8febb77de681f984ad0ee3449b01b152d6e5d3740a530ef32061fdf20c6"
     },
     "data/seller_cross.json": {
-      "bytes": 67342,
-      "sha256": "a65bac11270ac6dba509ebfe49cf81aee9c744722634e0146c18917374176414"
+      "bytes": 36461,
+      "sha256": "33753476de8c1a5a4ae90ade217551e507552260b05872a60e64eae0291980f1"
     },
     "data/velocity_by_industry.json": {
-      "bytes": 5176,
-      "sha256": "1296d18c169d6f98d6972f753c610451623e380035c6ecb9f4d6892f8256cf39"
+      "bytes": 5175,
+      "sha256": "e8a9e95ed15c3c0254a0361607671139d976adb91bc46adb32046b83ba1d4c8f"
     },
     "data/weekly.json": {
-      "bytes": 57727,
-      "sha256": "23f62fcf607c764ac5d604f3f5b16e9f6111922edd4f14617269219994b49823"
+      "bytes": 17672,
+      "sha256": "86b97fe3c0a76978801d6234599e7ff7c0f95e14d8213bc2b5e83140e6112346"
     },
     "data.js": {
       "bytes": 53439,
@@ -95,8 +232,8 @@
       "sha256": "5bb4930030838b8b7c43c88c5e626b6a0ed201a1046cc6e924173c5ec1d0152d"
     },
     "index.html": {
-      "bytes": 918,
-      "sha256": "c482cfebd806d0be4dd0e48712924f8adc89c42cf34814347c337112199a28a7"
+      "bytes": 968,
+      "sha256": "c07fedfba1ef87c28c2b2d54dc48588e5a9375bb8de0b07723e747fce6e0d8c1"
     },
     "shim.js": {
       "bytes": 3170,
