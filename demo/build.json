@@ -1,6 +1,6 @@
 {
-  "build_id": "20261020T170009Z",
-  "built_at": "2026-10-20T17:00:09.223Z",
+  "build_id": "20261020T170606Z",
+  "built_at": "2026-10-20T17:06:06.868Z",
   "source": "reference/atlas (snapshots of 16 October 2026)",
   "data_view": "CJA B2B Edition Demo",
   "checks": "passed",
@@ -96,7 +96,7 @@
     },
     "index.html": {
       "bytes": 918,
-      "sha256": "bf160b181740e813518e31e50e7d834d9a22f1d486bc27a5229a7143a141d20c"
+      "sha256": "c482cfebd806d0be4dd0e48712924f8adc89c42cf34814347c337112199a28a7"
     },
     "shim.js": {
       "bytes": 3170,
