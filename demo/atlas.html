@@ -1,0 +1,507 @@
+<link rel="stylesheet" href="fonts-serif.css">
+<link rel="stylesheet" href="fonts-sans.css">
+<style>
+/* Industry Pipeline Atlas. A two-layer report: the brief (one screen for an executive) above the analysis (for the analyst).
+   12-column measure of 1120px; serif for argument, condensed sans for data; one blue for this year, grey for last, red only for emphasis. */
+#dash-root { --dash-gutter: 0; }
+.pa {
+  --paper: #FFFFFF; --wash: #F4F4F1; --ink: #121212; --ink-2: #4A4A45; --ink-3: #77776F;
+  --rule: #D9D9D3; --rule-soft: #ECECE7;
+  --blue: #1D5B94; --blue-soft: #A9C3DC; --grey: #B9B9B1; --red: #CC3A1C;
+  --tip: #FFFFFF; --tip-edge: rgba(18,18,18,.12); --focus: #121212;
+  --serif: 'Atlas Serif', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: 'Atlas Sans', 'Barlow Semi Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  background: var(--paper); color: var(--ink); font-family: var(--serif); font-style: normal;
+  padding-left: max(16px, 4vw); padding-right: max(16px, 4vw); padding-block: 0 72px;
+  -webkit-font-smoothing: antialiased; font-variant-numeric: lining-nums;
+}
+.pa[data-tone="dark"] {
+  --paper: #111315; --wash: #191C1F; --ink: #ECEBE6; --ink-2: #B5B6B1; --ink-3: #888A85;
+  --rule: #33373B; --rule-soft: #23272A;
+  --blue: #6FA6DA; --blue-soft: #2C5372; --grey: #5B6064; --red: #F06A4A;
+  --tip: #1C2023; --tip-edge: rgba(236,235,230,.14); --focus: #F2EFE6;
+}
+.pa * { font-style: normal; }
+.pa-wrap { max-width: 1120px; margin-inline: auto; }
+.pa-sans { font-family: var(--sans); }
+.pa-num { font-family: var(--sans); font-variant-numeric: tabular-nums lining-nums; }
+
+/* masthead */
+.pa-top { border-top: 5px solid var(--ink); }
+.pa-runner { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; padding: 16px 0 0; font-family: var(--sans); font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.pa-kicker { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); font-weight: 700; }
+.pa-kicker::before { content: ""; width: 11px; height: 11px; background: var(--ink); }
+.pa-head { padding: 40px 0 34px; border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 24px 48px; align-items: end; }
+.pa-h1 { text-wrap: balance; margin: 0; grid-column: 1 / -1; font-size: clamp(40px, 5.2vw, 68px); line-height: 1; font-weight: 700; letter-spacing: -.022em; max-width: 17em; }
+.pa-stand { margin: 0; font-size: clamp(19px, 1.9vw, 24px); line-height: 1.38; color: var(--ink-2); max-width: 36em; grid-column: 1; }
+.pa-stand b { color: var(--ink); font-weight: 600; }
+.pa-asof { grid-column: 2; grid-row: 2; align-self: start; margin-top: 6px; font-family: var(--sans); font-size: 15px; line-height: 1.45; color: var(--ink-2); border-left: 1px solid var(--rule); padding-left: 18px; display: flex; flex-direction: column; gap: 10px; }
+.pa-asof b { display: block; color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.pa-asof p { margin: 0; }
+.pa-pick { display: flex; flex-direction: column; gap: 6px; }
+.pa-pick select, .pa-focus select { font: inherit; font-size: 15px; padding: 6px 30px 6px 10px; border: 1px solid var(--ink); background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2377776F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center; color: var(--ink); appearance: none; -webkit-appearance: none; border-radius: 0; cursor: pointer; max-width: 100%; }
+@media (max-width: 820px) { .pa-head { grid-template-columns: minmax(0, 1fr); } .pa-asof { grid-column: 1; grid-row: auto; } }
+
+/* figures */
+.pa-figs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--rule); }
+.pa-fig { padding: 24px 20px 26px 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pa-fig + .pa-fig { border-left: 1px solid var(--rule); padding-left: 20px; }
+.pa-fig .v { font-family: var(--sans); font-size: clamp(36px, 3.6vw, 48px); font-weight: 600; line-height: 1; letter-spacing: -.01em; font-variant-numeric: tabular-nums lining-nums; min-height: 1em; }
+.pa-fig .v.red { color: var(--red); } .pa-fig .v.blue { color: var(--blue); }
+.pa-fig .l { text-wrap: pretty; font-family: var(--sans); font-size: 16px; line-height: 1.3; color: var(--ink-2); min-height: 2.6em; }
+.pa-fig .l b { font-weight: 600; color: var(--ink); }
+@media (max-width: 960px) { .pa-figs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pa-fig:first-child { grid-column: 1 / -1; } .pa-fig:nth-child(even) { border-left: 0; padding-left: 0; } .pa-fig { border-bottom: 1px solid var(--rule-soft); } }
+
+/* chart frame */
+.pa-chart { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pa-chart::before { content: ""; width: 100%; height: 1px; background: var(--ink); margin-bottom: 6px; }
+.pa-chart.quiet::before { display: none; }
+.pa-ct { font-family: var(--sans); font-size: 21px; font-weight: 700; line-height: 1.2; }
+.pa-cs { font-family: var(--sans); font-size: 16px; color: var(--ink-2); line-height: 1.35; }
+.pa-key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--sans); font-size: 15px; color: var(--ink-2); padding-top: 4px; }
+.pa-key span { display: inline-flex; align-items: center; gap: 7px; }
+.pa-key i { width: 12px; height: 12px; background: var(--c); display: inline-block; }
+.pa-key i.ring { background: transparent; border: 2px solid var(--c); border-radius: 50%; box-sizing: border-box; }
+.pa-key i.dot { border-radius: 50%; }
+.pa-key i.line { height: 3px; width: 18px; }
+.pa-key [hidden] { display: none; }
+.pa-src { font-family: var(--sans); font-size: 14px; color: var(--ink-3); line-height: 1.4; }
+.pa-box { position: relative; width: 100%; }
+.pa-box svg { display: block; overflow: visible; }
+.pa svg text { font-family: var(--sans); }
+.pa svg .tk { font-size: 14px; fill: var(--ink-3); }
+.pa svg .lb { font-size: 15px; fill: var(--ink); }
+.pa svg .lb2 { font-size: 14px; fill: var(--ink-2); }
+.pa svg .an { font-size: 15px; font-weight: 600; fill: var(--ink); }
+.pa svg .halo { paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round; }
+.pa svg .hit { cursor: pointer; }
+
+/* brief: hero + implications */
+.pa-hero { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 32px 48px; padding: 36px 0 8px; align-items: start; }
+.pa-hero .side { display: flex; flex-direction: column; gap: 14px; align-self: end; padding-bottom: 40px; border-top: 1px solid var(--ink); padding-top: 14px; font-size: 18px; line-height: 1.55; color: var(--ink); }
+.pa-hero .side p { margin: 0; }
+@media (max-width: 960px) { .pa-hero { grid-template-columns: minmax(0, 1fr); } .pa-hero .side { padding-bottom: 0; } }
+.pa-acts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 36px; border-top: 1px solid var(--ink); }
+.pa-act { padding: 20px 28px 4px 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pa-act + .pa-act { border-left: 1px solid var(--rule); padding-left: 24px; }
+.pa-act .n { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.pa-status { font-style: normal; font-weight: 700; white-space: nowrap; }
+.pa-status::before { content: "· "; color: var(--ink-3); }
+.pa-status.br { color: var(--red); } .pa-status.op { color: var(--ink-2); } .pa-status.ok { color: var(--blue); }
+.pa-act dl { margin: auto 0 0; display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 5px 12px; font-family: var(--sans); font-size: 14px; line-height: 1.4; border-top: 1px solid var(--rule-soft); padding-top: 10px; }
+.pa-act dt { color: var(--ink-3); }
+.pa-act dd + dt { margin-top: 0; }
+.pa-acts-note { margin-top: 12px; } .pa-act dd { margin: 0; color: var(--ink); }
+.pa-act h3 { text-wrap: balance; margin: 0; font-size: 23px; line-height: 1.2; font-weight: 700; }
+.pa-act p { margin: 0 0 14px; font-size: 17px; line-height: 1.55; color: var(--ink-2); }
+.pa-act p b { color: var(--ink); font-weight: 600; }
+@media (max-width: 860px) { .pa-acts { grid-template-columns: minmax(0, 1fr); } .pa-act + .pa-act { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule-soft); } }
+
+/* analysis band */
+.pa-follow { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 20; width: min(680px, calc(100% - 32px)); box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--ink); color: var(--paper); font-family: var(--sans); font-size: 15px; line-height: 1.4; box-shadow: 0 12px 30px -12px rgba(0,0,0,.45); }
+.pa-follow[hidden] { display: none; }
+.pa-follow b { font-weight: 700; }
+.pa-follow button { margin-left: auto; flex: none; font: inherit; font-weight: 600; padding: 6px 12px; background: transparent; color: var(--paper); border: 1px solid var(--paper); border-radius: 0; cursor: pointer; }
+.pa-band { margin-top: 64px; border-top: 5px solid var(--ink); padding-top: 14px; display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; justify-content: space-between; }
+.pa-band h2 { margin: 0; font-size: 34px; font-weight: 700; letter-spacing: -.01em; }
+.pa-nav { display: flex; flex-wrap: nowrap; overflow-x: auto; max-width: 100%; gap: 4px 20px; font-family: var(--sans); font-size: 16px; scrollbar-width: none; }
+@media (max-width: 640px) { .pa-nav { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 24px; } }
+.pa-nav a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid transparent; padding: 6px 0; }
+.pa-nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.pa-focus { display: flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 15px; color: var(--ink-2); min-height: 34px; width: 100%; }
+.pa-focus button { font: inherit; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 0; cursor: pointer; }
+
+.pa-sec { padding-top: 56px; display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 16px; }
+.pa-sec + .pa-sec { margin-top: 8px; }
+.pa-sk { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); }
+.pa-sh { text-wrap: balance; margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; font-weight: 700; letter-spacing: -.012em; max-width: 24em; }
+.pa-row { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 32px 48px; align-items: start; }
+.pa-row.even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pa-notes { display: flex; flex-direction: column; gap: 14px; font-size: 18px; line-height: 1.6; padding-top: 14px; }
+.pa-notes p { margin: 0; min-height: 3em; text-wrap: pretty; }
+.pa-notes b { font-weight: 600; }
+.pa-notes .r { color: var(--red); } .pa-notes .bl { color: var(--blue); }
+@media (max-width: 960px) { .pa-row, .pa-row.even { grid-template-columns: minmax(0, 1fr); } }
+.pa-rule { border: 0; border-top: 1px solid var(--rule); margin: 8px 0 0; }
+
+/* dumbbell + segments + steps: HTML charts */
+.pa-db { font-family: var(--sans); }
+.pa-db .hd, .pa-db .rw { display: grid; grid-template-columns: minmax(120px, 210px) minmax(0, 1fr) 54px; gap: 14px; align-items: center; }
+.pa-db .hd { font-size: 14px; color: var(--ink-3); padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
+.pa-db .axis { position: relative; height: 18px; }
+.pa-db .axis span { position: absolute; transform: translateX(-50%); }
+.pa-db .rw { height: 27px; border-bottom: 1px solid var(--rule-soft); font-size: 15px; cursor: pointer; }
+.pa-db .rw:hover { background: var(--wash); }
+.pa-db .rw.on { background: var(--wash); font-weight: 600; }
+.pa-db .rw.dim { opacity: .38; }
+.pa-db .nm { text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pa-db .tr { position: relative; height: 27px; }
+.pa-db .gl { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule-soft); }
+.pa-db .seg { position: absolute; top: 12.5px; height: 2px; background: var(--grey); }
+.pa-db .a { position: absolute; top: 7.5px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; border: 2px solid var(--grey); background: var(--paper); box-sizing: border-box; }
+.pa-db .b { position: absolute; top: 7.5px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--blue); }
+.pa-db .dv { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.pa-db .gap { border-bottom: 1px solid var(--rule-soft); padding: 4px 0; background: repeating-linear-gradient(90deg, var(--rule) 0 2px, transparent 2px 6px) center / 100% 1px no-repeat; text-align: center; }
+.pa-db .gap.end { background: none; border-bottom: 0; text-align: left; }
+.pa-db .more { font: inherit; font-size: 14px; font-weight: 600; color: var(--blue); background: var(--paper); border: 0; padding: 4px 12px; cursor: pointer; }
+.pa-db .gap.end .more { padding-left: 0; }
+.pa-db .more:hover { color: var(--ink); }
+
+.pa-seg { font-family: var(--sans); display: flex; flex-direction: column; gap: 22px; }
+.pa-seg .g { display: flex; flex-direction: column; gap: 6px; }
+.pa-seg .gh { font-size: 15px; font-weight: 700; padding-bottom: 6px; border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+.pa-seg .gh span { font-weight: 400; color: var(--ink-3); font-size: 14px; }
+.pa-seg .sr { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: center; font-size: 16px; min-height: 30px; }
+.pa-seg .bar { position: relative; height: 18px; background: var(--rule-soft); }
+.pa-seg .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--c); }
+.pa-seg .bar em { position: absolute; top: 50%; transform: translateY(-50%); font-style: normal; font-size: 14px; font-weight: 600; padding-left: 6px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.pa-steps { position: relative; font-family: var(--sans); display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
+.pa-steps .st { display: grid; grid-template-columns: 158px minmax(0, 1fr) 58px; gap: 12px; align-items: center; font-size: 16px; }
+.pa-steps .st .nm { text-align: right; }
+.pa-steps .st .bar { position: relative; height: 22px; background: var(--rule-soft); }
+.pa-steps .st .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--c); }
+.pa-steps .st .v { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pa-steps .st.worst .nm, .pa-steps .st.worst .v { color: var(--red); font-weight: 700; }
+
+.pa-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 48px; margin-top: 18px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.pa-wf { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 760px) { .pa-pair { grid-template-columns: minmax(0, 1fr); } }
+.pa-seg2 { display: inline-flex; border: 1px solid var(--rule); font-family: var(--sans); }
+.pa-seg2 button { font: inherit; font-size: 14px; padding: 5px 12px; border: 0; background: transparent; color: var(--ink-2); cursor: pointer; }
+.pa-seg2 button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.pa-waffle { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 2px; width: 100%; }
+.pa-waffle i { aspect-ratio: 1; background: var(--c); display: block; }
+.pa { --cell: #ECECE7; } .pa[data-tone="dark"] { --cell: #2C3034; }
+.pa-big { font-family: var(--sans); display: flex; flex-direction: column; gap: 4px; }
+.pa-big .v { white-space: nowrap; font-size: clamp(32px, 8vw, 48px); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.pa-big .l { text-wrap: pretty; font-size: 16px; color: var(--ink-2); line-height: 1.35; max-width: 18em; }
+
+.pa-mult { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.pa-mult .c { padding: 10px 14px 12px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); cursor: pointer; min-width: 0; }
+.pa-mult .c:hover { background: var(--wash); }
+.pa-mult .c.dim { opacity: .35; }
+.pa-mult .c .t { display: flex; justify-content: space-between; gap: 6px; font-size: 14px; }
+.pa-mult .c .t span:first-child { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pa-mult .c .t span:last-child { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+@media (max-width: 960px) { .pa-mult { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .pa-mult { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ledger */
+.pa-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; font-family: var(--sans); }
+.pa-search { font: inherit; font-family: var(--sans); font-size: 16px; padding: 7px 12px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); width: min(100%, 280px); border-radius: 0; }
+.pa-tablewrap { overflow-x: auto; border-top: 1px solid var(--ink); position: relative; }
+.pa-more { display: block; width: 100%; margin: 0; padding: 12px 0; border-top: 1px solid var(--ink); font: inherit; font-family: var(--sans); font-size: 15px; font-weight: 600; color: var(--blue); background: none; border: 0; border-bottom: 1px solid var(--ink); cursor: pointer; text-align: left; }
+.pa-more:hover { color: var(--ink); } .pa-more[hidden] { display: none; }
+.pa-table td.hi, .pa-table td.lo { cursor: help; }
+.pa-table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 15px; font-variant-numeric: tabular-nums; }
+.pa-table th { text-align: right; padding: 0; border-bottom: 1px solid var(--rule); vertical-align: bottom; background: var(--paper); }
+.pa-table th > span { text-align: left; } .pa-table th:last-child, .pa-table td:last-child { padding-right: 0; width: 92px; min-width: 92px; } .pa-table th:last-child > span { padding-right: 0; text-align: right; white-space: nowrap; box-sizing: border-box; }
+.pa-table th button { box-sizing: border-box; }
+.pa-table th button, .pa-table th > span { font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-2); background: none; border: 0; padding: 10px 6px 8px; cursor: pointer; width: 100%; text-align: inherit; white-space: nowrap; display: block; }
+.pa-table th[aria-sort="ascending"] button, .pa-table th[aria-sort="descending"] button { color: var(--ink); }
+.pa-table th:first-child, .pa-table td:first-child { text-align: left; }
+.pa-table td { padding: 8px 6px; text-align: right; border-bottom: 1px solid var(--rule-soft); white-space: nowrap; }
+.pa-table tbody tr { cursor: pointer; }
+.pa-table tbody tr:hover td { background: var(--wash); }
+.pa-table tbody tr.on td { background: var(--wash); font-weight: 600; }
+.pa-table td.hi { color: var(--blue); font-weight: 600; } .pa-table td.lo { color: var(--red); font-weight: 600; }
+.pa-table .rv { display: inline-flex; align-items: center; gap: 8px; }
+.pa-table .rv s { display: block; width: 52px; height: 6px; background: var(--rule-soft); text-decoration: none; }
+.pa-table .rv s u { display: block; height: 6px; background: var(--blue); text-decoration: none; }
+@media (max-width: 820px) { .pa-table .x { display: none; } .pa-table th:first-child, .pa-table td:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper); box-shadow: 6px 0 8px -8px rgba(0,0,0,.35); white-space: normal; min-width: 120px; } }
+
+/* method */
+.pa-method { font-family: var(--sans); color: var(--ink-2); }
+.pa-method .lede { margin: 0 0 28px; max-width: 46em; font-family: var(--serif); font-size: 20px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.pa-method dl { margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 32px; }
+.pa-method dl > div { border-top: 1px solid var(--ink); padding-top: 12px; }
+.pa-method dt { color: var(--ink); font-weight: 700; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+.pa-method dd { margin: 0; font-size: 15px; line-height: 1.5; text-wrap: pretty; }
+@media (max-width: 1000px) { .pa-method dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pa-method dl { grid-template-columns: minmax(0, 1fr); gap: 20px; } .pa-method .lede { font-size: 18px; } }
+@media (max-width: 820px) { .pa-h-hero, .pa-h-line, .pa-h-sc { min-height: 0; } .pa-runner span:last-child { white-space: normal; } .pa-db .hd, .pa-db .rw { grid-template-columns: 128px minmax(0, 1fr) 42px; gap: 10px; } .pa-db .rw { height: auto; min-height: 34px; padding: 3px 0; } .pa-db .nm { white-space: normal; line-height: 1.15; font-size: 14px; } .pa-seg .gh, .pa-seg .sr { grid-template-columns: 96px minmax(0, 1fr) minmax(0, 1fr); gap: 10px; } }
+@media (max-width: 560px) { .pa-long { display: none; } .pa-wf { grid-template-columns: minmax(0, 1fr); } .pa-wf .pa-waffle { width: 200px; } }
+
+/* fourth quarter block, weekly strip, drivers, seller grid, steps */
+.pa-q4 { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--ink); display: flex; flex-direction: column; gap: 18px; }
+.pa-q4 h2 { margin: 0; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.12; font-weight: 700; letter-spacing: -.01em; text-wrap: balance; max-width: 26em; }
+.pa-week { font-family: var(--sans); display: flex; flex-direction: column; gap: 0; }
+.pa-week .wh { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); padding-bottom: 8px; border-bottom: 1px solid var(--ink); }
+.pa-week .wr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+.pa-week .wr .k { font-size: 15px; color: var(--ink-2); }
+.pa-week .wr .v { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.pa-week .wr .c { grid-column: 1 / -1; font-size: 14px; color: var(--ink-3); }
+.pa-alerts { font-family: var(--sans); display: flex; flex-direction: column; gap: 0; margin-top: 18px; }
+.pa-alerts .ah { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); padding-bottom: 8px; border-bottom: 1px solid var(--ink); }
+.pa-alerts .al { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--rule-soft); font-size: 15px; line-height: 1.35; }
+.pa-alerts .al i { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); display: block; transform: translateY(-1px); }
+.pa-alerts .al.br i { background: var(--red); } .pa-alerts .al.ok i { background: var(--blue); } .pa-alerts .al.na i { background: transparent; border: 1.5px solid var(--ink-3); box-sizing: border-box; } .pa-alerts .al.na b { color: var(--ink-3); font-weight: 400; }
+.pa-alerts .al b { font-weight: 600; white-space: nowrap; } .pa-alerts .al.br b { color: var(--red); }
+.pa-rt { font-family: var(--sans); border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+.pa-rt th { text-align: right; font-size: 13px; font-weight: 600; color: var(--ink-3); padding: 0 0 6px 10px; border-bottom: 1px solid var(--ink); }
+.pa-rt th:first-child, .pa-rt td:first-child { text-align: left; padding-left: 0; }
+.pa-rt td { text-align: right; padding: 8px 0 8px 10px; border-bottom: 1px solid var(--rule-soft); }
+.pa-rt td.vd { color: var(--ink-3); } .pa-rt td.vd.hot { color: var(--red); font-weight: 600; }
+.pa-grid3 { font-family: var(--sans); display: grid; grid-template-columns: 110px repeat(3, minmax(0, 1fr)); gap: 3px; }
+.pa-grid3 .gh { font-size: 13px; font-weight: 600; color: var(--ink-3); padding: 0 8px 6px; align-self: end; }
+.pa-grid3 .rh { font-size: 15px; font-weight: 600; align-self: start; padding-top: 12px; }
+.pa-grid3 .cell { padding: 12px 10px; min-height: 64px; display: flex; flex-direction: column; justify-content: flex-start; gap: 8px; background: color-mix(in srgb, var(--blue) calc(var(--t) * 100%), var(--paper)); color: var(--ink); border: 1px solid var(--rule-soft); }
+.pa-grid3 .cell.inv { color: #fff; } .pa[data-tone="dark"] .pa-grid3 .cell.inv { color: #0d0f11; }
+.pa-grid3 .cell .w { font-size: 24px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.pa-grid3 .cell .s { font-size: 13px; opacity: .92; line-height: 1.3; }
+.pa-lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; margin-top: 8px; }
+.pa-list { font-family: var(--sans); }
+.pa-list h4 { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); padding-bottom: 8px; border-bottom: 1px solid var(--ink); }
+.pa-list ol { list-style: none; margin: 0; padding: 0; }
+.pa-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 8px 0; border-bottom: 1px solid var(--rule-soft); font-size: 15px; }
+.pa-list li .n2 { font-weight: 600; } .pa-list li .d { grid-column: 1; font-size: 13px; color: var(--ink-3); }
+.pa-list li .v { grid-row: 1 / span 2; grid-column: 2; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; align-self: center; }
+@media (max-width: 760px) { .pa-lists { grid-template-columns: minmax(0, 1fr); } .pa-grid3 { grid-template-columns: 84px repeat(3, minmax(0, 1fr)); } .pa-grid3 .cell .w { font-size: 19px; } }
+.pa-steps2 { font-family: var(--sans); display: grid; grid-template-columns: 150px minmax(0, 1fr) 190px; column-gap: 14px; }
+.pa-steps2 .hd { font-size: 13px; font-weight: 600; color: var(--ink-3); padding-bottom: 6px; border-bottom: 1px solid var(--ink); }
+.pa-steps2 .nm, .pa-steps2 .cb, .pa-steps2 .dr { border-bottom: 1px solid var(--rule-soft); min-height: 36px; display: flex; align-items: center; }
+.pa-steps2 .nm { font-size: 15px; }
+.pa-steps2 .cb { position: relative; gap: 8px; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.pa-steps2 .cb i { display: block; height: 14px; background: var(--grey); flex: none; }
+.pa-steps2 .dr { gap: 8px; justify-content: flex-start; font-size: 14px; font-variant-numeric: tabular-nums; }
+.pa-steps2 .dr i { display: block; height: 10px; background: var(--ink-3); flex: none; }
+.pa-steps2 .dr span { color: var(--ink-2); white-space: nowrap; }
+.pa-steps2 .worst { color: var(--red); font-weight: 700; } .pa-steps2 .dr.worst i { background: var(--red); } .pa-steps2 .dr.worst span { color: var(--red); }
+.pa-steps2 .dr.up span { color: var(--ink-3); }
+@media (max-width: 640px) { .pa-steps2 { grid-template-columns: 104px minmax(0, 1fr) 92px; column-gap: 8px; } .pa-steps2 .nm { font-size: 14px; line-height: 1.15; } .pa-steps2 .dr span { font-size: 13px; white-space: normal; } }
+
+/* tooltip */
+.pa-tip { position: absolute; z-index: 5; pointer-events: none; background: var(--tip); border: 1px solid var(--tip-edge); box-shadow: 0 10px 28px -12px rgba(0,0,0,.35); padding: 8px 11px; font-family: var(--sans); font-size: 14px; line-height: 1.45; color: var(--ink); min-width: 150px; opacity: 0; transition: opacity .15s; font-variant-numeric: tabular-nums; }
+.pa-tip.on { opacity: 1; }
+.pa-tip .h { font-weight: 700; margin-bottom: 2px; }
+.pa-tip .r { display: flex; justify-content: space-between; gap: 14px; color: var(--ink-2); }
+.pa-tip .r b { color: var(--ink); font-weight: 600; }
+
+.pa :is(a, button, input, select):focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.pa-fail { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: inherit; font-family: var(--sans); font-size: 14px; color: var(--ink-3); }
+.pa-fail::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+.pa [data-dash-source-state=empty] { color: transparent; }
+.pa [data-dash-source-state=refreshing] { opacity: .5; transition: opacity .45s; }
+.pa-h-hero { min-height: 340px; } .pa-h-q4 { min-height: 300px; } .pa-h-drv { min-height: 260px; } .pa-h-strip { min-height: 96px; } .pa-h-line { min-height: 420px; } .pa-h-sc { min-height: 380px; } .pa-h-bee { min-height: 240px; } .pa-h-mult { min-height: 340px; }
+@media (prefers-reduced-motion: no-preference) {
+  .pa-anim .a-up { transform-box: fill-box; transform-origin: center bottom; animation: pa-up .9s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0s); }
+  .pa-anim .a-draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: pa-draw 1.4s cubic-bezier(.3,.7,.2,1) forwards; animation-delay: var(--d, .1s); }
+  .pa-anim .a-fade { animation: pa-fade .8s ease both; animation-delay: var(--d, 0s); }
+  @keyframes pa-up { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes pa-draw { to { stroke-dashoffset: 0; } }
+  @keyframes pa-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+</style>
+
+<div class="pa" id="atlas">
+ <div class="pa-wrap">
+
+  <div class="pa-top"></div>
+  <div class="pa-runner"><span class="pa-kicker">Industry briefing</span><span id="dateline"><span class="pa-long">Adobe Customer Journey Analytics · </span>CJA B2B Edition Demo</span></div>
+
+  <header class="pa-head" id="brief">
+    <h1 class="pa-h1" id="h1">2026 sold early</h1>
+    <p class="pa-stand dash-skeleton" id="stand"></p>
+    <div class="pa-asof">
+      <div><b>As of</b><p id="asof"></p></div>
+      <label class="pa-pick"><b>Follow an industry</b><select id="brief-pick" aria-label="Show the brief for one industry"></select></label>
+    </div>
+  </header>
+
+  <section class="pa-figs" id="figs" aria-label="Five numbers">
+    <div class="pa-fig"><div class="v" id="f1v"></div><div class="l" id="f1"></div></div>
+    <div class="pa-fig"><div class="v" id="f2v"></div><div class="l" id="f2"></div></div>
+    <div class="pa-fig"><div class="v red" id="f3v"></div><div class="l" id="f3"></div></div>
+    <div class="pa-fig"><div class="v red" id="f4v"></div><div class="l" id="f4"></div></div>
+    <div class="pa-fig"><div class="v red" id="f5v"></div><div class="l" id="f5"></div></div>
+  </section>
+
+  <section class="pa-hero">
+    <figure class="pa-chart">
+      <div class="pa-ct" id="hero-t">Running total of closed-won revenue</div>
+      <div class="pa-cs" id="hero-cs">$bn, January to December. 2025 in grey, 2026 in blue. Labels on the right are year-end totals</div>
+      <div class="pa-box pa-h-hero" id="hero" data-source="cumulative"></div>
+      <div class="pa-src" id="hero-src"></div>
+    </figure>
+    <div class="side" id="hero-side"></div>
+  </section>
+
+  <section class="pa-q4" id="q4" aria-label="The fourth quarter">
+    <div class="pa-sk">Outlook</div>
+    <h2 id="q4-h">New pipeline dried up in the third quarter</h2>
+    <div class="pa-row">
+      <figure class="pa-chart">
+        <div class="pa-ct">Opportunities created each month</div>
+        <div class="pa-cs">Opportunity-created events, all industries. 2025 in grey, 2026 in blue; October 2026 is to date</div>
+        <div class="pa-box pa-h-q4" id="created" data-source="created"></div>
+        <div class="pa-src" id="created-check" data-source="trough"></div>
+      </figure>
+      <div>
+        <div class="pa-week" id="week" data-source="weekly_facts"></div>
+        <div class="pa-alerts" id="alerts"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pa-acts" aria-label="Decisions">
+    <div class="pa-act"><span class="n">Watch <em class="pa-status" id="s1"></em></span><h3>New opportunities each week</h3><p id="a1"></p><dl id="d1"></dl></div>
+    <div class="pa-act"><span class="n">Fix <em class="pa-status" id="s2"></em></span><h3>Solution to proposal</h3><p id="a2"></p><dl id="d2"></dl></div>
+    <div class="pa-act"><span class="n">Test <em class="pa-status" id="s3"></em></span><h3>Whether the account score predicts wins</h3><p id="a3"></p><dl id="d3"></dl></div>
+  </section>
+  <div class="pa-src pa-acts-note">Owners, triggers and dates are proposals for the team to confirm. Status is worked out from the live data each time the page opens.</div>
+
+  <div class="pa-follow" id="follow" role="status" hidden></div>
+  <div class="pa-band" id="analysis">
+    <h2>The analysis</h2>
+    <nav class="pa-nav" aria-label="Sections"><a href="#time">Time</a><a href="#industries">Industries</a><a href="#accounts">Accounts</a><a href="#funnel">Funnel</a><a href="#ledger">Ledger</a><a href="#method">Method</a></nav>
+    <div class="pa-focus" id="focus" data-source="scorecard"></div>
+  </div>
+
+  <section class="pa-sec" id="time">
+    <div class="pa-sk">Time</div>
+    <h2 class="pa-sh" id="time-h">2026’s win rate trailed 2025’s for most of the year, then pulled ahead</h2>
+    <div class="pa-row">
+      <figure class="pa-chart">
+        <div class="pa-ct">Win rate against the same month of 2025</div>
+        <div class="pa-cs">2026 win rate minus 2025 win rate, percentage points, all industries. Win rate is defined in Method</div>
+        <div class="pa-box pa-h-line" id="line" data-source="monthly"></div>
+        <div class="pa-src">Complete months only. Rows below the chart give each year's win rate, %. Source: Adobe Customer Journey Analytics</div>
+      </figure>
+      <div class="pa-notes" id="n-time"></div>
+    </div>
+    <div class="pa-row" style="margin-top: 20px">
+      <figure class="pa-chart">
+        <div class="pa-ct">What changed around July: losses fell, wins held</div>
+        <div class="pa-cs">Deals won and deals lost each month of 2026, all industries</div>
+        <div class="pa-box pa-h-drv" id="drivers" data-source="drivers"></div>
+      </figure>
+      <figure class="pa-chart">
+        <div class="pa-ct">Other suspects, June against September</div>
+        <div class="pa-cs" id="suspects-cs">If one of these had moved, it could explain the turn</div>
+        <div id="suspects" data-source="drivers"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="pa-sec" id="industries">
+    <div class="pa-sk">Industries</div>
+    <h2 class="pa-sh" id="ind-h">Win rates rose in every industry</h2>
+    <div class="pa-row">
+      <figure class="pa-chart">
+        <div class="pa-ct">Win rate, first half against third quarter</div>
+        <div class="pa-cs">Industries with 100 or more wins, ranked by third-quarter win rate</div>
+        <div class="pa-key"><span><i class="ring" style="--c: var(--grey)"></i>January to June</span><span><i class="dot" style="--c: var(--blue)"></i>July to September</span></div>
+        <div class="pa-db" id="dumbbell" data-source="halves"></div>
+      </figure>
+      <div class="pa-notes" id="n-ind"></div>
+    </div>
+
+    <figure class="pa-chart" style="margin-top: 28px">
+      <div class="pa-ct">The same shape everywhere</div>
+      <div class="pa-cs">Each month’s closed-won revenue as a share of that industry’s January to September total. One thin line per industry; blue is all industries combined. Hover to pick out an industry</div>
+      <div class="pa-box pa-h-mult" id="mult" data-source="heat monthly"></div>
+    </figure>
+
+    <div class="pa-row" style="margin-top: 28px">
+      <figure class="pa-chart">
+        <div class="pa-ct">Deal size barely moves</div>
+        <div class="pa-cs">Average won deal by industry, 2026. One tick per industry</div>
+        <div class="pa-box pa-h-strip" id="bee" data-source="scorecard"></div>
+      </figure>
+      <div class="pa-notes" id="n-deal"></div>
+    </div>
+  </section>
+
+  <section class="pa-sec" id="accounts">
+    <div class="pa-sk">Accounts</div>
+    <h2 class="pa-sh" id="acc-h">Account segment separates winners more than industry does</h2>
+    <div class="pa-row">
+      <figure class="pa-chart">
+        <div class="pa-ct">Where to put sellers</div>
+        <div class="pa-cs">Win rate by company size and propensity to buy, 2026, all industries. Smaller figure: closed-won revenue per active account</div>
+        <div class="pa-grid3" id="grid3" data-source="seller"></div>
+        <div class="pa-lists" id="lists" data-source="seller"></div>
+      </figure>
+      <div class="pa-notes" id="n-acc"></div>
+    </div>
+    <div class="pa-row" style="margin-top: 20px">
+      <figure class="pa-chart">
+        <div class="pa-ct">Win rate and revenue share by churn risk</div>
+        <div class="pa-cs">All industries. Churn risk comes from the company profile on each account</div>
+        <div class="pa-seg" id="segments" data-source="segments"></div>
+      </figure>
+      <div class="pa-notes" id="n-seg"></div>
+    </div>
+  </section>
+
+  <section class="pa-sec" id="funnel">
+    <div class="pa-sk">Funnel</div>
+    <h2 class="pa-sh">Most losses come before a proposal is sent</h2>
+    <div class="pa-row">
+      <figure class="pa-chart">
+        <div class="pa-ct" id="steps-title">Where deals stall</div>
+        <div class="pa-cs" id="steps-cs">Stage events logged in 2026. Left: events at each stage. Right: how many fewer events each stage logs than the one before</div>
+        <div class="pa-steps2" id="steps" data-source="funnel_all"></div>
+        <div class="pa-src">Event counts, not a cohort of deals</div>
+      </figure>
+      <div class="pa-notes" id="n-fun"></div>
+    </div>
+    <div class="pa-pair">
+      <div class="pa-wf"><div class="pa-waffle" id="waffle" data-source="leak" role="img" aria-label="Of every 100 lost deals, the share that ended before a proposal"></div>
+        <div class="pa-big"><div class="v" style="color: var(--red)" data-source="leak" data-field="lost_before_share" data-row="0" data-fmt="per100"></div><div class="l">lost deals ended before a proposal was sent. The real share could be higher: the count treats every proposal that did not win as a later loss.</div></div></div>
+      <div class="pa-wf"><div class="pa-waffle" id="waffle2" data-source="funnel_all" role="img" aria-label="Of every 100 solutions presented, the share not followed by a proposal"></div>
+        <div class="pa-big"><div class="v" style="color: var(--red)" id="w2v" data-source="funnel_all" data-field="proposal" data-where="industry=All%20industries"></div><div class="l">solution presentations were not followed by a proposal. Both figures are event counts, not deals followed through.</div></div></div>
+    </div>
+  </section>
+
+  <section class="pa-sec" id="ledger" style="position: relative">
+    <div class="pa-sk">Ledger</div>
+    <h2 class="pa-sh" id="ledger-h">Every industry, every rate</h2>
+    <div class="pa-tools"><input class="pa-search" id="search" type="search" placeholder="Find an industry" aria-label="Find an industry"><span class="pa-key" id="tkey" style="padding: 0"><span id="tk-hi"><i style="--c: var(--blue)"></i>Top three</span><span id="tk-lo"><i style="--c: var(--red)"></i>Bottom three</span><span>on win rate and proposal rate</span></span><span class="pa-src" id="count"></span></div>
+    <div class="pa-tablewrap" id="tablebox">
+      <table class="pa-table" id="table" data-source="scorecard" data-row-key="industry">
+        <thead><tr>
+          <th data-field="industry"><button type="button" data-k="industry">Industry</button></th>
+          <th data-field="revenue_won"><button type="button" data-k="revenue_won">Closed-won revenue</button></th>
+          <th data-field="revenue_share" class="x"><button type="button" data-k="revenue_share">Share</button></th>
+          <th data-field="win_rate"><button type="button" data-k="win_rate">Win rate</button></th>
+          <th data-field="avg_deal" class="x"><button type="button" data-k="avg_deal">Avg deal</button></th>
+          <th data-field="proposal_rate" class="x"><button type="button" data-k="proposal_rate">Proposal rate</button></th>
+          <th data-field="meetings_per_opp" class="x"><button type="button" data-k="meetings_per_opp">Meetings / opp</button></th>
+          <th data-field="stage_days" class="x"><button type="button" data-k="stage_days">Days in stages</button></th>
+          <th data-field="accounts" class="x"><button type="button" data-k="accounts">Accounts</button></th>
+          <th class="x" data-source="heat" data-field="revenue_won" title="Closed-won revenue by month, January to September"><span>Jan to Sep</span></th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pa-src" style="margin-top: -12px">Blue marks the three best industries on win rate and proposal rate, red the three worst. Only industries with 100 or more wins are ranked. Hover a colored figure for its rank. Click a row to follow that industry through the analysis.</div>
+    <button type="button" class="pa-more" id="more">Show all industries</button>
+  </section>
+
+  <section class="pa-sec" id="method">
+    <div class="pa-sk">Method</div>
+    <div class="pa-method">
+      <p class="lede">Every figure is queried live from Adobe Customer Journey Analytics, data view "CJA B2B Edition Demo", in GMT, each time this page opens. Each number is linked to the query that produced it, and you can inspect any of them in Sources.</p>
+      <dl>
+        <div><dt>Win rate</dt><dd>Deals won ÷ (deals won + deals lost) in the period. Used the same way everywhere on the page.</dd></div>
+        <div><dt>Average won deal</dt><dd>Closed-won revenue ÷ closed-won deals.</dd></div>
+        <div><dt>Opportunities created</dt><dd>Opportunity-created events in the period. Treated as the lead indicator for revenue; see the fourth-quarter range for how closely it has tracked.</dd></div>
+        <div><dt>Fourth-quarter range</dt><dd id="m-fc">Closed-won revenue fitted on opportunities created three months earlier, across every complete month from April 2025. The range is about an 80% band from the fit’s monthly error. A guide, not a forecast of record.</dd></div>
+        <div><dt>Months of cover</dt><dd>Distinct opportunities with any event in the month ÷ deals closed (won or lost) that month. Active opportunities are distinct counts, so months do not add up to a year.</dd></div>
+        <div><dt>Pace needed</dt><dd>2025 fourth-quarter revenue minus 2026 fourth-quarter revenue so far, spread over the days left in the quarter and shown per 30 days.</dd></div>
+        <div><dt>Comparisons</dt><dd>Complete months only. The current month is shown separately and left out of year-on-year figures.</dd></div>
+        <div><dt>Funnel</dt><dd>Counts of stage events, not a cohort of deals followed through. Losses before proposal = lost deals − (proposals − wins), assuming one proposal per opportunity. Days in stages adds the average days per event at opportunity creation, needs assessment and solution presented.</dd></div>
+        <div><dt>Meetings per opportunity</dt><dd>Meeting events ÷ distinct opportunities. Across industries it tracks win rate almost exactly (correlation <b data-source="effort" data-field="correlation" data-row="0" id="m-corr"></b>), which points to a mechanical link: won deals pass through more stages and log more meetings.</dd></div>
+        <div><dt>Account segments</dt><dd>Company size, propensity to buy and propensity to churn come from the company profile on each account. Revenue per account counts accounts with any activity in 2026.</dd></div>
+        <div><dt>Data check</dt><dd>The fall in new opportunities shows in every top-of-funnel event at once, while closed deals and active people continue, so it is not a gap in data collection. 2025 shows the same trough in its spring.</dd></div>
+        <div><dt>Data notes</dt><dd>The source holds a misspelled duplicate, "Media &amp; Enteratainment" (2 accounts), added into Media &amp; Entertainment so the page shows 30 industries and totals match CJA. Best-and-worst claims cover industries with 100 or more wins.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+ </div>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>

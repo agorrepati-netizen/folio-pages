@@ -1,0 +1,106 @@
+{
+  "build_id": "20261020T164807Z",
+  "built_at": "2026-10-20T16:48:07.165Z",
+  "source": "reference/atlas (snapshots of 16 October 2026)",
+  "data_view": "CJA B2B Edition Demo",
+  "checks": "passed",
+  "check_count": 41,
+  "files": {
+    ".nojekyll": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "app.js": {
+      "bytes": 79386,
+      "sha256": "240fa5861f521f6573d97992f3ab7351daa7d99a3ec023c8dcb4192c072b8336"
+    },
+    "atlas.html": {
+      "bytes": 44222,
+      "sha256": "2128ebc4691c2e46b2f0db99c6d10a942df3f4a1230a85c356b7c1d6fc0d37c7"
+    },
+    "d3.min.js": {
+      "bytes": 279706,
+      "sha256": "f2094bbf6141b359722c4fe454eb6c4b0f0e42cc10cc7af921fc158fceb86539"
+    },
+    "data/by_churn.json": {
+      "bytes": 776,
+      "sha256": "645e19081290cb9149e207cce637cf969b5dd2d698072b5a940f806b353ee7fd"
+    },
+    "data/by_industry.json": {
+      "bytes": 7716,
+      "sha256": "2ef60d3c3bed5ef68e0bed4cc911e7890482ec181a0837848c3701401dca4978"
+    },
+    "data/by_propensity.json": {
+      "bytes": 755,
+      "sha256": "55410d48752fbaaede8d9f92e5081970552584b9936db51ec2fd1846a7fe61c8"
+    },
+    "data/by_size.json": {
+      "bytes": 829,
+      "sha256": "28a10a165833be25f8d97147c179d46566d2967876bc55d5a7373ce9e81507b3"
+    },
+    "data/engagement_by_industry.json": {
+      "bytes": 6539,
+      "sha256": "2e1adea53c5663f5381f2d080ee735751b3fd8ccbafcf50209f661693ba14647"
+    },
+    "data/funnel_by_industry.json": {
+      "bytes": 8232,
+      "sha256": "630be404463b2ea4d57176af8718f143eea0511282e032e7bb2389426eb540d2"
+    },
+    "data/industry_month_prior.json": {
+      "bytes": 55061,
+      "sha256": "85d03fe8b9a44153a01f181cc44d66bace27bcc76027a805088a7402399b7936"
+    },
+    "data/industry_month.json": {
+      "bytes": 44262,
+      "sha256": "ba20bd66487743a3467dea1dc500e156fe471368240176bd259a7ae156115b65"
+    },
+    "data/month_mix.json": {
+      "bytes": 67923,
+      "sha256": "2c0fc1a79b06010131880618c29f41dc3762bb4725b00158a6a62f143510c42a"
+    },
+    "data/monthly_funnel.json": {
+      "bytes": 5163,
+      "sha256": "4b625a9ca608c82cb73bad89557ea5343c5d03778de8d2bc876f48fd42f4ef5c"
+    },
+    "data/monthly_prior.json": {
+      "bytes": 2196,
+      "sha256": "7367623ab8307490c4e06a63d927f39d13692e17ede2d844bbd46433c5ad3a9c"
+    },
+    "data/monthly_trend.json": {
+      "bytes": 2326,
+      "sha256": "9c92023f031b7f2445a602f077e2163c8908dd09da7aa2c6a7cc887b5948ba9f"
+    },
+    "data/seller_cross.json": {
+      "bytes": 67342,
+      "sha256": "a65bac11270ac6dba509ebfe49cf81aee9c744722634e0146c18917374176414"
+    },
+    "data/velocity_by_industry.json": {
+      "bytes": 5176,
+      "sha256": "1296d18c169d6f98d6972f753c610451623e380035c6ecb9f4d6892f8256cf39"
+    },
+    "data/weekly.json": {
+      "bytes": 57727,
+      "sha256": "23f62fcf607c764ac5d604f3f5b16e9f6111922edd4f14617269219994b49823"
+    },
+    "data.js": {
+      "bytes": 53439,
+      "sha256": "16c1ae7c61ec47ba4c824a56e1ba9506a4742ce81d836badb8ac247d0d69c5bd"
+    },
+    "fonts-sans.css": {
+      "bytes": 121732,
+      "sha256": "c23108dbc3609f2aaa901cc40633ab3fc4ae1a7fcb4fbd2f53e14d681b24af23"
+    },
+    "fonts-serif.css": {
+      "bytes": 65953,
+      "sha256": "5bb4930030838b8b7c43c88c5e626b6a0ed201a1046cc6e924173c5ec1d0152d"
+    },
+    "index.html": {
+      "bytes": 918,
+      "sha256": "0d4d9f48007f05d1d81a470c9ee0b6228f03acfab9f086f88828462e45344321"
+    },
+    "shim.js": {
+      "bytes": 3170,
+      "sha256": "136cc04f0f517be77be66088ed42460a3214f0a1b1cc20f6cc74141da92d055b"
+    }
+  }
+}
